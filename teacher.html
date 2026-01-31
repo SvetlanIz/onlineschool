@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет учителя — Онлайн-школа</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/teacher.css">
+</head>
+<body class="teacher-page">
+  <header class="teacher-header">
+    <nav>
+      <span class="logo">Онлайн-школа — Кабинет учителя</span>
+      <a href="index.html">Выйти и выбрать роль</a>
+    </nav>
+  </header>
+
+  <main class="teacher-main">
+    <nav class="teacher-tabs" role="tablist">
+      <button type="button" class="teacher-tab active" data-tab="home" role="tab">Главная</button>
+      <button type="button" class="teacher-tab" data-tab="students" role="tab">Ученики</button>
+      <button type="button" class="teacher-tab" data-tab="lessons" role="tab">Онлайн-уроки</button>
+    </nav>
+
+    <section id="tab-home" class="teacher-tab-panel active" role="tabpanel">
+      <div class="teacher-card">
+        <div class="teacher-profile">
+          <div class="teacher-photo-wrap">
+            <img src="images/teacher-placeholder.jpg" alt="Фото преподавателя" onerror="this.style.display='none'; var pl=this.nextElementSibling; if(pl) pl.style.display='flex';">
+            <div class="teacher-photo-placeholder" style="display: none;">👩‍🏫</div>
+          </div>
+          <div class="teacher-info">
+            <h2>Преподаватель</h2>
+            <p class="role">Учитель начальных классов / Дошкольное образование</p>
+            <ul class="teacher-details">
+              <li><strong>Стаж:</strong> <span id="teacher-experience">— (будет заполнено)</span></li>
+              <li><strong>Достижения:</strong> <span id="teacher-achievements">— (будет заполнено)</span></li>
+              <li><strong>Образование:</strong> <span id="teacher-education">— (будет заполнено)</span></li>
+              <li><strong>Контакт:</strong> <span id="teacher-contact">— (будет заполнено)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-students" class="teacher-tab-panel" role="tabpanel" hidden>
+      <div class="teacher-card">
+        <h2 class="teacher-card-title">Создать учётную запись ученика</h2>
+        <p class="teacher-card-desc">Логин и пароль можно выдать ученику для входа на сайт.</p>
+        <form id="form-new-student" class="teacher-form">
+          <label for="new-student-name">Имя (для себя)</label>
+          <input type="text" id="new-student-name" placeholder="Например: Иванов Коля" autocomplete="off">
+          <label for="new-student-login">Логин</label>
+          <input type="text" id="new-student-login" placeholder="Уникальный логин" required autocomplete="off">
+          <label for="new-student-password">Пароль</label>
+          <input type="text" id="new-student-password" placeholder="Пароль для выдачи ученику" required autocomplete="off">
+          <p id="new-student-message" class="teacher-message" style="display: none;"></p>
+          <button type="submit">Создать и выдать ученику</button>
+        </form>
+        <div id="new-student-result" class="teacher-result-box" style="display: none;">
+          <p><strong>Учётная запись создана.</strong> Выдайте ученику:</p>
+          <p>Логин: <strong id="result-login"></strong></p>
+          <p>Пароль: <strong id="result-password"></strong></p>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <h2 class="teacher-card-title">Список учеников</h2>
+        <p class="teacher-card-desc">Перейдите в профиль ученика, чтобы выдать задание или выставить оценку.</p>
+        <ul id="students-list" class="teacher-students-list"></ul>
+      </div>
+    </section>
+
+    <section id="tab-lessons" class="teacher-tab-panel" role="tabpanel" hidden>
+      <div class="teacher-card">
+        <h2 class="teacher-card-title">Создать онлайн-урок</h2>
+        <p class="teacher-card-desc">Укажите дату и время — ученики смогут зайти по ссылке в запланированное время.</p>
+        <form id="form-new-lesson" class="teacher-form">
+          <label for="new-lesson-name">Название урока</label>
+          <input type="text" id="new-lesson-name" placeholder="Например: Математика, 1 класс" required autocomplete="off">
+          <label for="new-lesson-date">Дата</label>
+          <input type="date" id="new-lesson-date" required>
+          <label for="new-lesson-time">Время</label>
+          <input type="time" id="new-lesson-time" required>
+          <p id="new-lesson-message" class="teacher-message" style="display: none;"></p>
+          <button type="submit">Создать урок</button>
+        </form>
+        <div id="new-lesson-result" class="teacher-result-box" style="display: none;">
+          <p><strong>Урок создан.</strong></p>
+          <p>Ссылка для учеников: <a id="lesson-link-for-students" href="" target="_blank"></a></p>
+          <p><button type="button" id="btn-start-lesson" class="teacher-btn-inline">Начать урок сейчас</button></p>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <h2 class="teacher-card-title">Запланированные уроки</h2>
+        <ul id="lessons-list" class="teacher-lessons-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/student-credentials.js"></script>
+  <script src="js/teacher-data.js"></script>
+  <script src="js/teacher-auth.js"></script>
+  <script src="js/teacher-cabinet.js"></script>
+  <script>
+    (function() {
+      if (!sessionStorage.getItem('teacherAuth')) {
+        window.location.href = 'teacher-login.html';
+      }
+    })();
+  </script>
+</body>
+</html>

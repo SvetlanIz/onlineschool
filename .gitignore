@@ -1,0 +1,9 @@
+# Временные файлы Windows/Office
+~$*
+*.tmp
+Thumbs.db
+
+# Служебные папки (если появятся)
+node_modules/
+.env
+.DS_Store

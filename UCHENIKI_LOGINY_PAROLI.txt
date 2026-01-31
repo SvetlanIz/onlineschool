@@ -1,0 +1,37 @@
+Пул логинов и паролей для 30 учеников
+(выдаются преподавателем детям для входа в аккаунт)
+
+Формат: логин / пароль
+
+1.  uchenik01 / Sun01!
+2.  uchenik02 / Sun02!
+3.  uchenik03 / Sun03!
+4.  uchenik04 / Sun04!
+5.  uchenik05 / Sun05!
+6.  uchenik06 / Sun06!
+7.  uchenik07 / Sun07!
+8.  uchenik08 / Sun08!
+9.  uchenik09 / Sun09!
+10. uchenik10 / Sun10!
+11. uchenik11 / Sun11!
+12. uchenik12 / Sun12!
+13. uchenik13 / Sun13!
+14. uchenik14 / Sun14!
+15. uchenik15 / Sun15!
+16. uchenik16 / Sun16!
+17. uchenik17 / Sun17!
+18. uchenik18 / Sun18!
+19. uchenik19 / Sun19!
+20. uchenik20 / Sun20!
+21. uchenik21 / Sun21!
+22. uchenik22 / Sun22!
+23. uchenik23 / Sun23!
+24. uchenik24 / Sun24!
+25. uchenik25 / Sun25!
+26. uchenik26 / Sun26!
+27. uchenik27 / Sun27!
+28. uchenik28 / Sun28!
+29. uchenik29 / Sun29!
+30. uchenik30 / Sun30!
+
+Пароль администрации для входа в кабинет учителя: Moscow3!33

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход в аккаунт ребёнка — Онлайн-школа</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-login-page">
+  <span class="student-deco-login student-deco-login-1" aria-hidden="true">🐻</span>
+  <span class="student-deco-login student-deco-login-2" aria-hidden="true">🦊</span>
+  <span class="student-deco-login student-deco-login-3" aria-hidden="true">🐰</span>
+  <span class="student-deco-login student-deco-login-4" aria-hidden="true">🌈</span>
+
+  <div class="student-login-box">
+    <h1>Вход в аккаунт ребёнка</h1>
+    <p>Введите логин и пароль, выданные преподавателем</p>
+    <form id="student-login-form">
+      <label for="student-login">Логин</label>
+      <input type="text" id="student-login" name="login" placeholder="Логин" required autocomplete="username">
+      <label for="student-password">Пароль</label>
+      <input type="password" id="student-password" name="password" placeholder="Пароль" required autocomplete="current-password">
+      <p id="student-error" class="error" style="display: none;"></p>
+      <button type="submit">Войти</button>
+    </form>
+    <a href="student.html" class="back-link">← На главную</a>
+  </div>
+  <script src="js/student-credentials.js"></script>
+  <script src="js/teacher-data.js"></script>
+  <script src="js/student-auth.js"></script>
+</body>
+</html>

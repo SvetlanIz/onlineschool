@@ -1,0 +1,238 @@
+/* Версия для учеников: яркие тона, персонажи как элементы декора */
+
+.student-page {
+  background: linear-gradient(180deg, #fff5e6 0%, #ffe4cc 30%, #ffd4b8 60%, #ffccaa 100%);
+  min-height: 100vh;
+  color: #2d3436;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративные персонажи (простые фигуры/эмодзи) */
+.student-deco {
+  position: fixed;
+  font-size: 3rem;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.student-deco-1 { top: 10%; left: 5%; }
+.student-deco-2 { top: 25%; right: 8%; }
+.student-deco-3 { bottom: 20%; left: 10%; }
+.student-deco-4 { bottom: 15%; right: 12%; }
+.student-deco-5 { top: 50%; left: 3%; }
+.student-deco-6 { top: 60%; right: 5%; }
+
+.student-header {
+  background: linear-gradient(135deg, #ff9f43 0%, #ffd93d 50%, #6bcb77 100%);
+  color: #2d3436;
+  padding: 1.25rem 2rem;
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 6px 24px rgba(255, 159, 67, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+.student-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.student-header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.student-header a {
+  color: #2d3436;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.4);
+  transition: background 0.2s;
+}
+
+.student-header a:hover {
+  background: rgba(255,255,255,0.7);
+}
+
+.student-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.student-welcome {
+  background: linear-gradient(145deg, #fff 0%, #fff8f0 100%);
+  border-radius: 28px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 28px rgba(255, 159, 67, 0.2);
+  border: 3px solid rgba(255, 159, 67, 0.3);
+}
+
+.student-welcome h2 {
+  color: #e17055;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.student-welcome p {
+  color: #2d3436;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.student-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.student-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.student-btn-primary {
+  background: linear-gradient(135deg, #6bcb77, #4d96ff);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(107, 203, 119, 0.4);
+}
+
+.student-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 203, 119, 0.5);
+}
+
+.student-btn-secondary {
+  background: linear-gradient(135deg, #ffd93d, #ff9f43);
+  color: #2d3436;
+  box-shadow: 0 4px 16px rgba(255, 159, 67, 0.3);
+}
+
+.student-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 159, 67, 0.4);
+}
+
+/* Страница входа для ребёнка */
+.student-login-page {
+  background: linear-gradient(180deg, #fff5e6 0%, #ffe4cc 50%, #ffd4b8 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.student-deco-login {
+  position: absolute;
+  font-size: 4rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.student-deco-login-1 { top: 15%; left: 10%; }
+.student-deco-login-2 { top: 20%; right: 15%; }
+.student-deco-login-3 { bottom: 20%; left: 15%; }
+.student-deco-login-4 { bottom: 15%; right: 10%; }
+
+.student-login-box {
+  background: linear-gradient(145deg, #fff 0%, #fff8f0 100%);
+  border-radius: 28px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(255, 159, 67, 0.25);
+  border: 3px solid rgba(255, 159, 67, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+.student-login-box h1 {
+  color: #e17055;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.student-login-box p {
+  color: #2d3436;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.student-login-box label {
+  display: block;
+  color: #2d3436;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.student-login-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #ffd93d;
+  border-radius: 16px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.student-login-box input:focus {
+  outline: none;
+  border-color: #ff9f43;
+  box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.2);
+}
+
+.student-login-box button {
+  width: 100%;
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #6bcb77, #4d96ff);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.student-login-box button:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+.student-login-box .error {
+  color: #d63031;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.student-login-box .back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #e17055;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.student-login-box .back-link:hover {
+  text-decoration: underline;
+}

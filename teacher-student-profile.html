@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль ученика — Кабинет учителя</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/teacher.css">
+</head>
+<body class="teacher-page">
+  <header class="teacher-header">
+    <nav>
+      <span class="logo">Профиль ученика</span>
+      <a href="teacher.html#tab-students">← К списку учеников</a>
+    </nav>
+  </header>
+
+  <main class="teacher-main">
+    <div class="teacher-card">
+      <h2 class="teacher-card-title" id="profile-student-name">Ученик</h2>
+      <p class="teacher-card-desc">Логин: <strong id="profile-student-login">—</strong></p>
+    </div>
+
+    <div class="teacher-card">
+      <h2 class="teacher-card-title">Выдать задание</h2>
+      <form id="form-assignment" class="teacher-form">
+        <label for="assignment-text">Текст задания</label>
+        <textarea id="assignment-text" rows="3" placeholder="Опишите задание для ученика" required></textarea>
+        <button type="submit">Выдать задание</button>
+      </form>
+    </div>
+
+    <div class="teacher-card">
+      <h2 class="teacher-card-title">Задания ученика</h2>
+      <ul id="assignments-list" class="teacher-detail-list"></ul>
+      <p id="assignments-empty" class="teacher-list-empty" style="display: none;">Заданий пока нет.</p>
+    </div>
+
+    <div class="teacher-card">
+      <h2 class="teacher-card-title">Выставить оценку</h2>
+      <form id="form-grade" class="teacher-form">
+        <label for="grade-subject">Предмет</label>
+        <input type="text" id="grade-subject" placeholder="Например: Математика" autocomplete="off">
+        <label for="grade-value">Оценка</label>
+        <input type="text" id="grade-value" placeholder="Например: 5" required autocomplete="off">
+        <label for="grade-comment">Комментарий (необязательно)</label>
+        <input type="text" id="grade-comment" placeholder="Комментарий" autocomplete="off">
+        <button type="submit">Выставить оценку</button>
+      </form>
+    </div>
+
+    <div class="teacher-card">
+      <h2 class="teacher-card-title">Оценки ученика</h2>
+      <ul id="grades-list" class="teacher-detail-list"></ul>
+      <p id="grades-empty" class="teacher-list-empty" style="display: none;">Оценок пока нет.</p>
+    </div>
+  </main>
+
+  <script src="js/student-credentials.js"></script>
+  <script src="js/teacher-data.js"></script>
+  <script src="js/teacher-auth.js"></script>
+  <script>
+    (function() {
+      if (!sessionStorage.getItem('teacherAuth')) {
+        window.location.href = 'teacher-login.html';
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      var login = params.get('login');
+      if (!login) {
+        window.location.href = 'teacher.html';
+        return;
+      }
+
+      var students = window.getStudents && window.getStudents() || [];
+      var student = students.filter(function(s) { return s.login === login; })[0];
+      document.getElementById('profile-student-name').textContent = student ? (student.name || login) : login;
+      document.getElementById('profile-student-login').textContent = login;
+
+      function renderAssignments() {
+        var list = document.getElementById('assignments-list');
+        var empty = document.getElementById('assignments-empty');
+        var items = window.getAssignments && window.getAssignments(login) || [];
+        list.innerHTML = items.map(function(a) {
+          var d = a.date ? new Date(a.date).toLocaleString('ru') : '—';
+          return '<li><span class="teacher-detail-date">' + d + '</span> ' + escapeHtml(a.text) + '</li>';
+        }).join('');
+        empty.style.display = items.length === 0 ? 'block' : 'none';
+      }
+
+      function renderGrades() {
+        var list = document.getElementById('grades-list');
+        var empty = document.getElementById('grades-empty');
+        var items = window.getGrades && window.getGrades(login) || [];
+        list.innerHTML = items.map(function(g) {
+          var d = g.date ? new Date(g.date).toLocaleString('ru') : '—';
+          return '<li><span class="teacher-detail-date">' + d + '</span> ' +
+            escapeHtml(g.subject) + ' — <strong>' + escapeHtml(String(g.grade)) + '</strong>' +
+            (g.comment ? ' <span class="teacher-grade-comment">' + escapeHtml(g.comment) + '</span>' : '') + '</li>';
+        }).join('');
+        empty.style.display = items.length === 0 ? 'block' : 'none';
+      }
+
+      function escapeHtml(s) {
+        if (!s) return '';
+        var div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
+
+      document.getElementById('form-assignment').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var text = document.getElementById('assignment-text').value.trim();
+        if (text && window.addAssignment) {
+          window.addAssignment(login, text);
+          document.getElementById('assignment-text').value = '';
+          renderAssignments();
+        }
+      });
+
+      document.getElementById('form-grade').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var subject = document.getElementById('grade-subject').value.trim();
+        var grade = document.getElementById('grade-value').value.trim();
+        var comment = document.getElementById('grade-comment').value.trim();
+        if (grade && window.addGrade) {
+          window.addGrade(login, subject, grade, comment);
+          document.getElementById('grade-subject').value = '';
+          document.getElementById('grade-value').value = '';
+          document.getElementById('grade-comment').value = '';
+          renderGrades();
+        }
+      });
+
+      renderAssignments();
+      renderGrades();
+    })();
+  </script>
+</body>
+</html>

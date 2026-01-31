@@ -1,0 +1,281 @@
+/* Страница онлайн-урока: общий стиль (синие тона как у учителя) */
+
+.lesson-room {
+  background: linear-gradient(160deg, #e8f4fc 0%, #d0e8f7 100%);
+  min-height: 100vh;
+  color: #1a365d;
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-header {
+  background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lesson-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.lesson-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lesson-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lesson-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.lesson-btn.off {
+  background: rgba(200,80,80,0.6);
+}
+
+.lesson-role {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.lesson-main {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.lesson-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lesson-video-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #2c5282;
+  aspect-ratio: 4/3;
+}
+
+.lesson-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lesson-video-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.lesson-participants {
+  font-size: 0.9rem;
+  color: #2c5282;
+}
+
+.lesson-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.lesson-board-section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(43, 108, 176, 0.1);
+  border: 1px solid rgba(43, 108, 176, 0.15);
+  position: relative;
+}
+
+.lesson-board-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.lesson-board-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: #bee3f8;
+  color: #2c5282;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lesson-board-btn:hover {
+  background: #90cdf4;
+}
+
+.lesson-board-btn.active {
+  background: #2b6cb0;
+  color: #fff;
+}
+
+.lesson-board-toolbar label {
+  font-size: 0.9rem;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.lesson-board-toolbar input[type="color"] {
+  width: 32px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lesson-board-toolbar input[type="range"] {
+  width: 80px;
+}
+
+.lesson-board-wrapper {
+  width: 100%;
+  min-height: 280px;
+  max-height: 50vh;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f7fafc;
+  border: 2px solid #bee3f8;
+}
+
+.lesson-board-wrapper.hidden {
+  display: none;
+}
+
+#lesson-board {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  cursor: crosshair;
+}
+
+.lesson-board-placeholder {
+  text-align: center;
+  color: #718096;
+  padding: 2rem;
+  font-size: 1rem;
+}
+
+.lesson-board-placeholder.hidden {
+  display: none;
+}
+
+.lesson-chat-section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(43, 108, 176, 0.1);
+  border: 1px solid rgba(43, 108, 176, 0.15);
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+
+.lesson-chat-title {
+  font-size: 1rem;
+  color: #2c5282;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 200px;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.lesson-chat-messages p {
+  margin-bottom: 0.35rem;
+  word-break: break-word;
+}
+
+.lesson-chat-messages .msg-name {
+  font-weight: 600;
+  color: #2b6cb0;
+}
+
+.lesson-chat-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.lesson-chat-form input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #bee3f8;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+.lesson-chat-form input:focus {
+  outline: none;
+  border-color: #2b6cb0;
+}
+
+.lesson-chat-form button {
+  padding: 0.5rem 1rem;
+  background: #2b6cb0;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .lesson-main {
+    flex-direction: column;
+  }
+  .lesson-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .lesson-video-wrap {
+    width: 160px;
+  }
+}

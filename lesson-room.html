@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн-урок — Онлайн-школа</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/lesson-room.css">
+</head>
+<body class="lesson-room" id="lesson-body">
+  <header class="lesson-header">
+    <span class="lesson-title" id="lesson-title">Онлайн-урок</span>
+    <div class="lesson-controls">
+      <button type="button" id="btn-mic" class="lesson-btn" title="Микрофон">🎤 Вкл</button>
+      <button type="button" id="btn-cam" class="lesson-btn" title="Камера">📷 Вкл</button>
+      <span id="lesson-role-label" class="lesson-role"></span>
+    </div>
+  </header>
+
+  <main class="lesson-main">
+    <aside class="lesson-sidebar">
+      <div class="lesson-video-wrap">
+        <video id="local-video" autoplay playsinline muted></video>
+        <span id="local-label" class="lesson-video-label">Вы</span>
+      </div>
+      <p class="lesson-participants" id="participants-info">Участники: 1</p>
+    </aside>
+
+    <section class="lesson-center">
+      <!-- Доска: у учителя — рисование, у ученика — только просмотр -->
+      <div id="board-section" class="lesson-board-section">
+        <div id="board-toolbar" class="lesson-board-toolbar" style="display: none;">
+          <button type="button" id="board-show" class="lesson-board-btn active">Показать доску ученикам</button>
+          <button type="button" id="board-clear" class="lesson-board-btn">Очистить</button>
+          <label>Цвет <input type="color" id="board-color" value="#000000"></label>
+          <label>Толщина <input type="range" id="board-width" min="1" max="20" value="3"></label>
+        </div>
+        <div id="board-wrapper" class="lesson-board-wrapper">
+          <canvas id="lesson-board"></canvas>
+        </div>
+        <p id="board-placeholder" class="lesson-board-placeholder">Доска появится, когда учитель включит её</p>
+      </div>
+
+      <div class="lesson-chat-section">
+        <h3 class="lesson-chat-title">Чат</h3>
+        <div id="chat-messages" class="lesson-chat-messages"></div>
+        <form id="chat-form" class="lesson-chat-form">
+          <input type="text" id="chat-input" placeholder="Сообщение..." autocomplete="off">
+          <button type="submit">Отправить</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/lesson-room.js"></script>
+</body>
+</html>

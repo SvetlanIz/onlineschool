@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой кабинет — Онлайн-школа</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-page">
+  <span class="student-deco student-deco-1" aria-hidden="true">🐻</span>
+  <span class="student-deco student-deco-2" aria-hidden="true">🦊</span>
+  <span class="student-deco student-deco-3" aria-hidden="true">🐰</span>
+  <span class="student-deco student-deco-4" aria-hidden="true">🐱</span>
+  <span class="student-deco student-deco-5" aria-hidden="true">⭐</span>
+  <span class="student-deco student-deco-6" aria-hidden="true">🌈</span>
+
+  <header class="student-header">
+    <nav>
+      <span class="logo">Онлайн-школа</span>
+      <a href="student.html">Главная</a>
+      <a href="student-login.html">Сменить аккаунт</a>
+    </nav>
+  </header>
+
+  <main class="student-main">
+    <div class="student-welcome">
+      <h2>Мой кабинет</h2>
+      <p>Ты вошёл в свой аккаунт. Здесь позже появятся уроки, задания и игры.</p>
+      <p><strong>Логин:</strong> <span id="display-login">—</span></p>
+    </div>
+  </main>
+  <script>
+    (function() {
+      if (!sessionStorage.getItem('studentAuth')) {
+        window.location.href = 'student-login.html';
+        return;
+      }
+      var login = sessionStorage.getItem('studentLogin');
+      var el = document.getElementById('display-login');
+      if (el && login) el.textContent = login;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+/* Версия для учителя: синие тона, мягкие скругления */
+
+.teacher-page {
+  background: linear-gradient(160deg, #e8f4fc 0%, #d0e8f7 50%, #b8dcf2 100%);
+  min-height: 100vh;
+  color: #1a365d;
+}
+
+.teacher-header {
+  background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+  color: #fff;
+  padding: 1.25rem 2rem;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 20px rgba(43, 108, 176, 0.3);
+}
+
+.teacher-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.teacher-header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.teacher-header a {
+  color: #fff;
+  opacity: 0.95;
+}
+
+.teacher-header a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.teacher-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.teacher-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(43, 108, 176, 0.08);
+  border: 1px solid rgba(43, 108, 176, 0.1);
+}
+
+.teacher-profile {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.teacher-photo-wrap {
+  width: 180px;
+  height: 180px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #bee3f8, #90cdf4);
+  flex-shrink: 0;
+}
+
+.teacher-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teacher-info h2 {
+  color: #2c5282;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.teacher-info .role {
+  color: #2b6cb0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.teacher-details {
+  list-style: none;
+}
+
+.teacher-details li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(43, 108, 176, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.teacher-details li:last-child {
+  border-bottom: none;
+}
+
+.teacher-login-page {
+  background: linear-gradient(160deg, #e8f4fc 0%, #d0e8f7 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.teacher-login-box {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(43, 108, 176, 0.15);
+  border: 1px solid rgba(43, 108, 176, 0.1);
+}
+
+.teacher-login-box h1 {
+  color: #2c5282;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.teacher-login-box p {
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.teacher-login-box label {
+  display: block;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.teacher-login-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #bee3f8;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.teacher-login-box input:focus {
+  outline: none;
+  border-color: #2b6cb0;
+}
+
+.teacher-login-box button {
+  width: 100%;
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #2b6cb0, #2c5282);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.teacher-login-box button:hover {
+  opacity: 0.95;
+}
+
+.teacher-login-box .error {
+  color: #c53030;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.teacher-login-box .back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #2b6cb0;
+  font-size: 0.9rem;
+}
+
+.teacher-login-box .back-link:hover {
+  text-decoration: underline;
+}
+
+/* Вкладки кабинета */
+.teacher-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.teacher-tab {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: #fff;
+  color: #2b6cb0;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(43, 108, 176, 0.1);
+  transition: background 0.2s, color 0.2s;
+}
+
+.teacher-tab:hover {
+  background: #e6fffa;
+  color: #2c5282;
+}
+
+.teacher-tab.active {
+  background: linear-gradient(135deg, #2b6cb0, #2c5282);
+  color: #fff;
+}
+
+.teacher-tab-panel {
+  display: none;
+}
+
+.teacher-tab-panel.active {
+  display: block;
+}
+
+.teacher-card-title {
+  color: #2c5282;
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-card-desc {
+  color: #4a5568;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.teacher-form label {
+  display: block;
+  color: #2d3748;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.teacher-form input,
+.teacher-form textarea {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 2px solid #bee3f8;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.teacher-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.teacher-form input:focus,
+.teacher-form textarea:focus {
+  outline: none;
+  border-color: #2b6cb0;
+}
+
+.teacher-form button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #2b6cb0, #2c5282);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.teacher-form button:hover {
+  opacity: 0.95;
+}
+
+.teacher-message {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.teacher-message.error {
+  color: #c53030;
+}
+
+.teacher-result-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #ebf8ff;
+  border-radius: 16px;
+  border: 1px solid #90cdf4;
+}
+
+.teacher-result-box p {
+  margin-bottom: 0.5rem;
+}
+
+.teacher-result-box a {
+  color: #2b6cb0;
+  word-break: break-all;
+}
+
+.teacher-btn-inline {
+  padding: 0.5rem 1rem;
+  background: #2b6cb0;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.teacher-students-list,
+.teacher-lessons-list {
+  list-style: none;
+}
+
+.teacher-student-item,
+.teacher-lesson-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(43, 108, 176, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.teacher-lesson-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.teacher-lesson-info {
+  margin-bottom: 0.35rem;
+}
+
+.teacher-lesson-actions {
+  font-size: 0.9rem;
+}
+
+.teacher-student-name {
+  font-weight: 600;
+  color: #2c5282;
+}
+
+.teacher-student-login {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.teacher-link {
+  color: #2b6cb0;
+  font-weight: 500;
+}
+
+.teacher-link:hover {
+  text-decoration: underline;
+}
+
+.teacher-list-empty {
+  color: #718096;
+  font-style: italic;
+  padding: 1rem 0;
+}
+
+.teacher-detail-list {
+  list-style: none;
+}
+
+.teacher-detail-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(43, 108, 176, 0.1);
+}
+
+.teacher-detail-date {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-right: 0.5rem;
+}
+
+.teacher-grade-comment {
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.teacher-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #bee3f8, #90cdf4);
+  color: #2c5282;
+  font-size: 4rem;
+}
