@@ -1,0 +1,9 @@
+{
+  "name": "onlineschool-ws",
+  "version": "1.0.0",
+  "description": "WebSocket-сервер для онлайн-уроков (чат, доска, участники)",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "^8.14.0"
+  }
+}

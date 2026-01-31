@@ -1,7 +1,7 @@
 (function() {
   var params = new URLSearchParams(window.location.search);
   var lessonId = params.get('id');
-  var role = params.get('role'); // 'teacher' | 'student'
+  var role = params.get('role');
 
   if (!lessonId || !role) {
     document.body.innerHTML = '<p style="padding:2rem;">Не указан урок или роль. Используйте ссылку из кабинета учителя.</p>';
@@ -17,6 +17,15 @@
     console.warn('BroadcastChannel not supported', e);
   }
 
+  var ws = null;
+  var wsUrl = null;
+  if (typeof window.LESSON_WS_URL !== 'undefined' && window.LESSON_WS_URL) {
+    wsUrl = window.LESSON_WS_URL;
+  } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    wsUrl = 'ws://localhost:3001';
+  }
+
+  var participants = [];
   var localVideo = document.getElementById('local-video');
   var localStream = null;
   var micOn = true;
@@ -28,6 +37,7 @@
   var lastX, lastY;
   var boardColor = '#000000';
   var boardWidth = 3;
+  var myName = isTeacher ? 'Учитель' : (sessionStorage.getItem('studentLogin') || 'Ученик');
 
   document.getElementById('lesson-role-label').textContent = isTeacher ? 'Учитель' : 'Ученик';
   document.getElementById('lesson-title').textContent = 'Онлайн-урок';
@@ -41,37 +51,107 @@
     document.getElementById('board-wrapper').classList.add('hidden');
   }
 
+  function updateParticipantsList(list) {
+    participants = list || participants;
+    var el = document.getElementById('participants-info');
+    if (!el) return;
+    if (participants.length === 0) {
+      el.textContent = 'Участники: подключение...';
+      return;
+    }
+    var names = participants.map(function(p) { return p.name; }).join(', ');
+    el.textContent = 'Участники (' + participants.length + '): ' + names;
+  }
+
   function send(msg) {
+    if (ws && ws.readyState === 1) {
+      ws.send(JSON.stringify(msg));
+      return;
+    }
     if (channel) channel.postMessage(msg);
+  }
+
+  function handleMessage(data) {
+    if (!data || !data.type) return;
+    if (data.type === 'participants') {
+      updateParticipantsList(data.participants || []);
+      return;
+    }
+    if (data.type === 'boardVisible') {
+      boardVisible = !!data.value;
+      if (!isTeacher) {
+        document.getElementById('board-placeholder').classList.toggle('hidden', boardVisible);
+        document.getElementById('board-wrapper').classList.toggle('hidden', !boardVisible);
+        if (boardVisible) {
+          strokes = data.strokes || [];
+          redrawCanvas();
+        }
+      }
+      return;
+    }
+    if (data.type === 'boardState' && !isTeacher) {
+      strokes = data.strokes || [];
+      redrawCanvas();
+      return;
+    }
+    if (data.type === 'draw' && !isTeacher && boardVisible) {
+      strokes.push(data.stroke);
+      drawStroke(data.stroke);
+      return;
+    }
+    if (data.type === 'clear' && !isTeacher) {
+      strokes = [];
+      clearCanvas();
+      return;
+    }
+    if (data.type === 'chat') {
+      addChatMessage(data.name || 'Участник', data.text);
+    }
   }
 
   if (channel) {
     channel.onmessage = function(e) {
-      var data = e.data;
-      if (!data || !data.type) return;
-      if (data.type === 'boardVisible') {
-        boardVisible = !!data.value;
-        if (!isTeacher) {
-          document.getElementById('board-placeholder').classList.toggle('hidden', boardVisible);
-          document.getElementById('board-wrapper').classList.toggle('hidden', !boardVisible);
-          if (boardVisible) {
-            strokes = data.strokes || [];
-            redrawCanvas();
-          }
-        }
-      } else if (data.type === 'boardState' && !isTeacher) {
-        strokes = data.strokes || [];
-        redrawCanvas();
-      } else if (data.type === 'draw' && !isTeacher && boardVisible) {
-        strokes.push(data.stroke);
-        drawStroke(data.stroke);
-      } else if (data.type === 'clear' && !isTeacher) {
-        strokes = [];
-        clearCanvas();
-      } else if (data.type === 'chat') {
-        addChatMessage(data.name || 'Участник', data.text);
-      }
+      handleMessage(e.data);
     };
+  }
+
+  if (wsUrl) {
+    try {
+      ws = new WebSocket(wsUrl);
+      ws.onopen = function() {
+        send({
+          type: 'join',
+          lessonId: lessonId,
+          role: role,
+          name: myName,
+          id: 'u_' + Date.now() + '_' + Math.random().toString(36).slice(2)
+        });
+        updateParticipantsList([]);
+      };
+      ws.onmessage = function(e) {
+        try {
+          var data = JSON.parse(e.data);
+          handleMessage(data);
+        } catch (err) {
+          console.warn('WS message parse error', err);
+        }
+      };
+      ws.onclose = function() {
+        updateParticipantsList([]);
+      };
+      ws.onerror = function() {
+        updateParticipantsList([]);
+      };
+    } catch (err) {
+      console.warn('WebSocket error', err);
+    }
+  } else {
+    participants = [{ role: role, name: myName }];
+    updateParticipantsList(participants);
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      var info = document.getElementById('participants-info');
+      if (info) info.innerHTML = 'Участники (1): ' + myName + '. <small>Для чата с разных устройств укажите адрес сервера в js/lesson-ws-config.js (см. README).</small>';
+    }
   }
 
   function addChatMessage(name, text) {
@@ -94,9 +174,8 @@
     var input = document.getElementById('chat-input');
     var text = (input && input.value) ? input.value.trim() : '';
     if (!text) return;
-    var name = isTeacher ? 'Учитель' : (sessionStorage.getItem('studentLogin') || 'Ученик');
-    send({ type: 'chat', name: name, text: text });
-    addChatMessage(name, text);
+    send({ type: 'chat', name: myName, text: text });
+    addChatMessage(myName, text);
     input.value = '';
   });
 

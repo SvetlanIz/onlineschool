@@ -59,6 +59,33 @@ git push -u origin main
 
 ---
 
+## Онлайн-уроки: чат и участники с разных устройств
+
+Чтобы **чат, доска и список участников** работали, когда учитель и ученики заходят с разных компьютеров/телефонов, нужен **WebSocket-сервер**.
+
+### Вариант 1: Локально (учитель и ученик на одном компьютере)
+
+В папке проекта в терминале:
+
+```bash
+cd server
+npm install
+node server.js
+```
+
+Откройте урок в двух вкладках браузера — сервер подхватится автоматически (`ws://localhost:3001`).
+
+### Вариант 2: В интернете (Glitch)
+
+1. Зайдите на https://glitch.com и войдите (через GitHub удобно).  
+2. Нажмите **New project** → **Import from GitHub**, вставьте: `https://github.com/SvetlanIz/onlineschool` и нажмите **OK**.  
+3. Glitch склонирует проект и запустит сервер (в корне есть `package.json` с командой `npm start`). Дождитесь «Your project is live».  
+4. Переименуйте проект в **onlineschool-ws**: название вверху слева → **Edit project details** → **Project name**: `onlineschool-ws` → **Save**. Адрес станет **https://onlineschool-ws.glitch.me**.  
+5. В коде сайта уже прописан адрес `wss://onlineschool-ws.glitch.me` в **js/lesson-ws-config.js** — менять не нужно. Скопируьте адрес приложения, например: `https://onlineschool-ws.glitch.me`.  
+6. Запушьте изменения на GitHub. Сайт **https://svetlaniz.github.io/onlineschool/** будет подключаться к серверу на Glitch — учитель и ученики с разных устройств увидят друг друга и смогут общаться в чате. 
+
+---
+
 ## Пароли и доступ
 
 - **Кабинет учителя:** пароль — `Moscow3!33`  
